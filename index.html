@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>JavaScript Speed Reader 0.30</title>
-     <script src='https://code.responsivevoice.org/responsivevoice.js'>     responsiveVoice.setDefaultVoice("US English Male");</script>
+     <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 
 <script type="text/javascript">
 
@@ -1116,6 +1116,8 @@ var SpeedReader = (function()
     
     var init = function()
     {
+        // set voice 
+           responsiveVoice.setDefaultVoice("US English Male");
         // Create variables for the elements this program accesses.
         mainDiv                 = document.getElementById("mainDiv");
         outputDiv               = document.getElementById("outputDiv");
