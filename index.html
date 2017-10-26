@@ -704,7 +704,7 @@ var SpeedReader = (function()
         stopReader();
         
         text = inputTextArea.value;
-    //    multiWordDisplay = multiWordCheckBox.checked;
+        multiWordDisplay = multiWordCheckBox.checked;
 
         // To increase the amount of time a long word is displayed, increase the value of timerDelaySlope.
         //
@@ -1374,10 +1374,10 @@ Are you willing to read with me?
 <br><br>
 
 <div id="speedAndCheckBoxesDiv">
-<span class="UIText">Speed <input type="text" id="speedInputElement" class="UIInput" size="5" value="60">
+<span class="UIText">Speed <input type="text" id="speedInputElement" class="UIInput" size="5" value="90">
 <label><input type="checkbox" id="hideTextArea" checked>Hide text box when reading</label></span>
 <span id="alsoTextSpan" class="UIDisabledText"><label><input type="checkbox" id="hideButtons" disabled>Also hide buttons</label></span>
-<span class="UIText"><label><input type="checkbox" id="multiWordCheckBox" checked>Display multiple words</label></span><br>
+<span class="UIText"><label><input type="checkbox" id="multiWordCheckBox" >Display multiple words</label></span><br>
 <span class="UIText">Average words per minute: <span id="wpmDisplay"></span></span>
 </div>
 </div>
