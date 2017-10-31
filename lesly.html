@@ -244,6 +244,7 @@ var SpeedReader = (function()
     var inputTextArea;          // The textarea that stores the text to read.
     var speedInputElement;      // The Word per minute textbox.
     var startStopButton;        // The button that starts and stops the reader.
+    var nextButton;        // The button that goes to the next chapter.
     var pauseResumeButton;      // The button that pauses and resumes the reader.
     var goBackButton;           // The Go Back button.
     var goForwardButton;        // The Go Forward button.
@@ -257,6 +258,7 @@ var SpeedReader = (function()
     var multiWordCheckBox;      // The checkbox to allow display of more than one word at a time.
     var wpmDisplay;             // The span to display the words per minute.
 	var startProcessingTime;
+	var readToMe;
     //////////
     // Functions.
     //////////
@@ -317,7 +319,15 @@ var SpeedReader = (function()
             outputTextElement.innerHTML = padAndHighlightWord(word);
             
             //text to speech 
-            responsiveVoice.speak(word, "US English Female", {rate:1.2,onend:voiceEndCallback(word)});
+             if (readToMe.checked)
+        	{
+           		 responsiveVoice.speak(word, "US English Female", {rate:1.2,onend:voiceEndCallback(word)});
+           	}
+        	else
+        	{
+        		voiceEndCallback(word);
+        	}
+            
         //   responsiveVoice.speak(word,{onend:voiceEndCallback(word)});
 
             // Select the word in the text area.
@@ -719,7 +729,7 @@ var SpeedReader = (function()
         //                 0.15:                0.4,                 2.5
         //                 0.20:                0.2,                 3.0
         
-        timerDelay = Math.floor(60000 / speedInputElement.value) + 150;
+        timerDelay = Math.floor(60000 / speedInputElement.value) +100 ;
         timerDelaySlope = multiWordDisplay ? timerDelaySlopeMulti : timerDelaySlopeSingle;
         timerDelayOffset = timerDelaySlope * (-5) + 1;
         
@@ -1131,6 +1141,7 @@ var SpeedReader = (function()
         inputTextArea           = document.getElementById("inputTextArea");
         speedInputElement       = document.getElementById("speedInputElement");
         startStopButton         = document.getElementById("startStopButton");
+        nextButton         		= document.getElementById("nextButton");
         pauseResumeButton       = document.getElementById("pauseResumeButton");
         goBackButton            = document.getElementById("goBackButton");
         goForwardButton         = document.getElementById("goForwardButton");
@@ -1143,6 +1154,7 @@ var SpeedReader = (function()
         controlButtons          = document.getElementById("controlButtons");
         multiWordCheckBox       = document.getElementById("multiWordCheckBox");
         wpmDisplay              = document.getElementById("wpmDisplay");
+        readToMe                = document.getElementById("readToMe");
        
         // Add event handlers
         if (document.addEventListener) 
@@ -1151,6 +1163,7 @@ var SpeedReader = (function()
             document.addEventListener("keydown", keydownInput, false);
             document.addEventListener("keypress", keypressInput, false);
             startStopButton.addEventListener("click", startStopReader, false);
+            nextButton.addEventListener("click", console.log("URL ended"+location.href), false);
             pauseResumeButton.addEventListener("click", pauseResumeReader, false);
             goBackButton.addEventListener("click", goBackReader, false);
             goForwardButton.addEventListener("click", goForwardReader, false);
@@ -1223,6 +1236,16 @@ var SpeedReader = (function()
 // Initialize the speed reader.
 
 window.onload = SpeedReader.init;
+
+var getnext = function()
+{
+	console.log("URL ended"+location.href);
+	var url_string = location.href;
+	
+	var url = new URL(url_string);
+	var c = url.searchParams.get("next");
+	location.href = c
+}
 
 </script>
 <style>
@@ -1299,7 +1322,7 @@ body
 {
   margin: 0px 6px 0px 6px;
   text-align:center; 
-  font-size:32px; 
+  font-size:120px; 
   font-family:monospace;
 }
 
@@ -1358,9 +1381,11 @@ textarea
 <br><br>
 
 <div id="controlButtons" style="visibility: visible;">
-    <input type="button" class="controlButton" id="goBackButton" value="◄◄">
+
     <input type="button" class="controlButton" id="startStopButton" value="►">
+    <input type="button" class="controlButton" id="nextButton" value="►▐">
     <input type="button" class="controlButton" id="pauseResumeButton" value="▌▐">
+    <input type="button" class="controlButton" id="goBackButton" value="◄◄">
     <input type="button" class="controlButton" id="goForwardButton" value="►►">
     <input type="button" class="controlButton" id="slowerButton" value="▼">
     <input type="button" class="controlButton" id="fasterButton" value="▲">
@@ -1380,11 +1405,16 @@ Are you willing to read with me?
 <span class="UIText">Speed <input type="text" id="speedInputElement" class="UIInput" size="5" value="120">
 <label><input type="checkbox" id="hideTextArea" checked="">Hide text box when reading</label></span>
 <span id="alsoTextSpan" class="UIText"><label><input type="checkbox" id="hideButtons">Also hide buttons</label></span>
-<span class="UIText"><label><input type="checkbox" id="multiWordCheckBox">Display multiple words</label></span><br>
+<span class="UIText"><label><input type="checkbox" id="multiWordCheckBox">Display multiple words</label>
+<label><input type="checkbox" id="readToMe" checked="">Read to me</label>
+</span><br>
 <span class="UIText">Average words per minute: <span id="wpmDisplay">90.9</span></span>
 </div>
 </div>
 </div>
-
+<!--
+<span class="outputText">
+<a onclick="getnext()" href="#">Next</a></span><br>
+-->
 
 </body></html>
