@@ -47,8 +47,8 @@ var SpeedReader = (function()
     var timerDelay;                 // Time in milliseconds before displaying the next word.
     var timerDelaySlope;            // Used to calculate the next timeout. Allows longer words to be displayed for a longer period of time.
     var timerDelayOffset;           // Used to calculate the next timeout. Allows longer words to be displayed for a longer period of time.
-    var timerDelaySlopeMulti = 0.00;// Timer display slope for multiple word display.
-    var timerDelaySlopeSingle = 0.20;// Timer display slope for single word display.
+    var timerDelaySlopeMulti = 0.30;// Timer display slope for multiple word display.
+    var timerDelaySlopeSingle = 0.30;// Timer display slope for single word display.
     var isPlaying = false;          // true if the player is displaying words or paused; otherwise false.
     var isPaused = false;           // true if the player is paused; otherwise false.
     var isTextAreaHidden = false;   // true if the textarea is hidden while reading; otherwise false.
@@ -1234,7 +1234,7 @@ body
 
 #mainDiv
 {
-  width:720px;
+  width:900px;
   margin-left:auto;
   margin-right:auto;
   vertical-align:center;
@@ -1242,7 +1242,7 @@ body
 
 #outputDiv
 {
-  width:720px;
+  width:900px;
   margin-left:auto;
   margin-right:auto;
   margin-top:0;
@@ -1377,7 +1377,7 @@ Are you willing to read with me?
 <br><br>
 
 <div id="speedAndCheckBoxesDiv">
-<span class="UIText">Speed <input type="text" id="speedInputElement" class="UIInput" size="5" value="110">
+<span class="UIText">Speed <input type="text" id="speedInputElement" class="UIInput" size="5" value="90">
 <label><input type="checkbox" id="hideTextArea" checked="">Hide text box when reading</label></span>
 <span id="alsoTextSpan" class="UIText"><label><input type="checkbox" id="hideButtons">Also hide buttons</label></span>
 <span class="UIText"><label><input type="checkbox" id="multiWordCheckBox">Display multiple words</label></span><br>
