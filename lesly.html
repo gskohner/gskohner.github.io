@@ -719,7 +719,7 @@ var SpeedReader = (function()
         //                 0.15:                0.4,                 2.5
         //                 0.20:                0.2,                 3.0
         
-        timerDelay = Math.floor(60000 / speedInputElement.value) + 100;
+        timerDelay = Math.floor(60000 / speedInputElement.value) + 150;
         timerDelaySlope = multiWordDisplay ? timerDelaySlopeMulti : timerDelaySlopeSingle;
         timerDelayOffset = timerDelaySlope * (-5) + 1;
         
